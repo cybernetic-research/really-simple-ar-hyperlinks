@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <!-- Include the super-hands component for controller interaction -->
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+  </head>
+  <body style='margin : 0px; overflow: hidden;'>
+    <a-scene embedded arjs='sourceType: webcam;'>
+      <!-- Text entities -->
+
+      <a-text id="bk-1" value="Yahoo"     position="-1 2 -2.01"   rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+      <a-text id="bk-2" value="BBC"       position= "0 2 -2.01"   rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+      <a-text id="bk-3" value="iPlayer"   position= "1 2 -2.01"   rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+
+      <a-text id="bk-4" value="Virgin Go" position="-1.5 1.5 -2.01" rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>      
+      <a-text id="bk-5" value="Hackaday"  position="-0.5 1.5 -2.01" rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+      <a-text id="bk-6" value="youtube"   position= "0.5 1.5 -2.01" rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+      <a-text id="bk-7" value="bing"      position= "1.5 1.5 -2.01" rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+
+      <a-text id="bk-8"  value="Steam"    position="-1   1   -2.01"   rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+      <a-text id="bk-9"  value="meta"     position= "0   1   -2.01"   rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+      <a-text id="bk-10" value="msn"      position= "1   1   -2.01"   rotation="0 0 0" scale ="0.51 0.51 0.51" color="#000000"></a-text>
+
+      <a-text id="interactive-text-1" value="Yahoo"     position="-1 2 -2"   rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+      <a-text id="interactive-text-2" value="BBC"       position= "0 2 -2"   rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+      <a-text id="interactive-text-3" value="iPlayer"   position= "1 2 -2"   rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+
+      <a-text id="interactive-text-4" value="Virgin Go" position="-1.5 1.5 -2" rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>      
+      <a-text id="interactive-text-5" value="Hackaday"  position="-0.5 1.5 -2" rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+      <a-text id="interactive-text-6" value="youtube"   position= "0.5 1.5 -2" rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+      <a-text id="interactive-text-7" value="bing"      position= "1.5 1.5 -2" rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+
+      <a-text id="interactive-text-8"  value="Steam"    position="-1 1 -2"   rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+      <a-text id="interactive-text-9"  value="meta"     position= "0 1 -2"   rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+      <a-text id="interactive-text-10" value="msn"      position= "1 1 -2"   rotation="0 0 0" scale ="0.5 0.5 0.5" color="#FF0000"></a-text>
+
+      <!-- Hand controllers -->
+      <a-entity id="left-hand" laser-controls="hand: left" super-hands></a-entity>
+      <a-entity id="right-hand" laser-controls="hand: right" super-hands></a-entity>
+      <!-- Camera with passthrough -->
+      <a-entity camera look-controls></a-entity>
+    </a-scene>
+    <script>
+
+    var link1  = "https://uk.yahoo.com/";
+    var link2  = "https://www.bbc.co.uk/news";
+    var link3  = "https://www.bbc.co.uk/iplayer";
+    var link4  = "https://virgintvgo.virginmedia.com/en/watchtv"; 
+    var link5  = 'https://hackaday.com/';
+    var link6  = 'https://www.youtube.com/';
+    var link7  = 'https://www.bing.com/search?q=Bing%20AI&showconv=1&form=MA13FV';
+    var link8  = 'https://store.steampowered.com/';
+    var link9  = 'https://www.meta.com/en-gb/experiences/?utm_source=l.facebook.com&utm_medium=oculusredirect';
+    var link10 = 'https://www.msn.com/en-gb/'; 
+
+      // Function to change the color of the text
+      // Function to change the color of the text
+  function changeColor(e) {
+    // Get the currently intersected element by the controller
+    var intersectedEl = e.detail.intersectedEl;
+    if (intersectedEl && intersectedEl.id.includes('interactive-text')) {
+        switch(intersectedEl.id){
+            case "interactive-text-1":{ href = link1; }break;
+            case "interactive-text-2":{ href = link2; }break;
+            case "interactive-text-3":{ href = link3; }break;
+            case "interactive-text-4":{ href = link4; }break;
+            case "interactive-text-5":{ href = link5; }break;
+            case "interactive-text-6":{ href = link6; }break;
+            case "interactive-text-7":{ href = link7; }break;
+            case "interactive-text-8":{ href = link8; }break;
+            case "interactive-text-9":{ href = link9; }break;
+            case "interactive-text-10":{ href = link10; }break;
+        }
+        window.location.href = href;
+      // Toggle the color between red and green
+      intersectedEl.setAttribute('color', intersectedEl.getAttribute('color') === '#FF0000' ? '#00FF00' : '#FF0000');
+    }
+  }
+
+  // Add event listeners to the controllers for the 'click' event
+  var leftHand = document.querySelector('#left-hand');
+  var rightHand = document.querySelector('#right-hand');
+  leftHand.addEventListener('click', changeColor);
+  rightHand.addEventListener('click', changeColor);
+    </script>
+  </body>
+</html>
